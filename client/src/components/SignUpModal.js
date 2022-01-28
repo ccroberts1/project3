@@ -9,7 +9,7 @@ function SignUpModal() {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Sign Up</Button>}
+      trigger={<a>Sign Up</a>}
     >
       <Modal.Header>Sign Up for a New Account</Modal.Header>
       <Modal.Content>

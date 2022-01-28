@@ -1,13 +1,22 @@
 import NavBar from './components/NavBar';
-// import 'semantic-ui-css/semantic.min.css'
+import { MediaContextProvider } from "./utils/MediaContextProvider"
+
+
+const leftItems = [
+  { as: "a", content: "Home", key: "home" },
+  { as: "a", content: "Users", key: "users" }
+];
+
+
 
 function App() {
   return (
     <>
-      <NavBar>
+      <MediaContextProvider>
+      <NavBar leftItems={leftItems}>
 
       </NavBar>
-      
+      </MediaContextProvider>
     </>
   );
 }
