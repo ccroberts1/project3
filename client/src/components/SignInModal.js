@@ -11,7 +11,7 @@ function SignInModal() {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Sign In</Button>}
+      trigger={<a>Sign In</a>}
     >
       <Modal.Header>Sign In</Modal.Header>
             <Modal.Content image>
