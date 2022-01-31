@@ -3,6 +3,7 @@ import SignInModal from './SignInModal';
 import SignUpModal from './SignUpModal';
 import { Media} from "../utils/MediaContextProvider"
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
+import Auth from "../utils/auth"
 
 
 
@@ -60,6 +61,11 @@ const NavBarDesktop = (props) => {
     visible
   } = props;
 
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   return (
     <Sidebar.Pushable>
       <Sidebar
@@ -80,17 +86,29 @@ const NavBarDesktop = (props) => {
                   {leftItems.map((item) => (
                   <Menu.Item {...item} />
          ))}
-          <Menu.Menu position="right">
-            <Menu.Item as="a">
-                <SignInModal></SignInModal>
-            </Menu.Item>
-            <Menu.Item as="a">
-                <SignUpModal></SignUpModal>
-            </Menu.Item>
-            <Menu.Item as="a"  onClick={onToggle}>
-                <Icon name='shopping cart'></Icon>
-            </Menu.Item>
-          </Menu.Menu>
+          
+          {Auth.loggedIn() ? (
+            <Menu.Menu position="right">
+              <Menu.Item onClick={logout}>
+                Sign Out
+              </Menu.Item>
+              <Menu.Item>
+                  Account Options
+              </Menu.Item>
+              <Menu.Item as="a"  onClick={onToggle}>
+                    <Icon name='shopping cart'></Icon>
+              </Menu.Item>
+            </Menu.Menu>
+          ) : (
+              <Menu.Menu position="right">
+                <Menu.Item as="a">
+                    <SignInModal></SignInModal>
+                </Menu.Item>
+                <Menu.Item as="a">
+                    <SignUpModal></SignUpModal>
+                </Menu.Item>
+              </Menu.Menu>
+            )}
           
         </Menu>
       </Sidebar.Pusher>
