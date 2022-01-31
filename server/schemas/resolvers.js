@@ -1,7 +1,9 @@
 const { User, Product, Category, Order } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const stripe = require("stripe"); //(Needs our stripe key)
+const stripe = require("stripe")(
+  "sk_test_51KMeBWA1XTMt9WgUa5GcO0LP2LejBD7czxMCWqgAlu81A2aYVfsc5aaKJk7FaZ3r6JkINaSFIYyDwTrAT3ApUraL00IdX9nNa6"
+);
 
 const resolvers = {
   Query: {
@@ -49,6 +51,13 @@ const resolvers = {
         return user.orders.id(_id);
       }
 
+      throw new AuthenticationError("Not logged in");
+    },
+    favorites: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        return user.favorites;
+      }
       throw new AuthenticationError("Not logged in");
     },
     checkout: async (parent, args, context) => {
@@ -109,6 +118,30 @@ const resolvers = {
       }
 
       throw new AuthenticationError("Not logged in");
+    },
+    addFavorite: async (parent, args, context) => {
+      console.log(context);
+      if (context.user) {
+        const favorite = await Product.findById(args);
+
+        await User.findByIdAndUpdate(context.user_id, {
+          $push: { favorites: favorite },
+        });
+
+        return favorite;
+      }
+    },
+    removeFavorite: async (parent, args, context) => {
+      console.log(context);
+      if (context.user) {
+        const favorite = await Product.findbyId(args);
+
+        await User.findByIdAndUpdate(context.user_id, {
+          $pull: { favorites: favorite },
+        });
+
+        return favorite;
+      }
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
