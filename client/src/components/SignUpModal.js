@@ -13,6 +13,7 @@ function SignUpModal() {
     password: "",
     confirmPassword: "",
   });
+
   const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
@@ -103,18 +104,18 @@ function SignUpModal() {
             <Form.Field>
               <Checkbox label="I agree to the Terms and Conditions" />
             </Form.Field>
-            <Button
-              content="Create Account"
-              //   type="submit"
-              labelPosition="right"
-              icon="checkmark"
-              onClick={handleFormSubmit}
-              positive
-            />
           </Form>
         </Modal.Description>
       </Modal.Content>
-      <Modal.Actions></Modal.Actions>
+      <Modal.Actions>
+        <Button
+          content="Create Account"
+          labelPosition="right"
+          icon="checkmark"
+          onClick={handleFormSubmit}
+          positive
+        />
+      </Modal.Actions>
     </Modal>
   );
 }
