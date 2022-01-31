@@ -7,11 +7,26 @@ function ProductList() {
     <Grid.Column>Product List</Grid.Column>
    
 
-    <Grid.Row columns={6}>
+    <Grid.Row columns={4}>
+      <Grid.Column >
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+      </Grid.Column>
       <Grid.Column>
         <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
       </Grid.Column>
       <Grid.Column>
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+        </Grid.Column>
+              <Grid.Column>
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+      </Grid.Column>
+      <Grid.Column>
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+      </Grid.Column>
+      <Grid.Column>
+        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+        </Grid.Column>
+            <Grid.Column>
         <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
       </Grid.Column>
       <Grid.Column>

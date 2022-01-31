@@ -1,41 +1,10 @@
 import React from 'react';
+import { Icon, Menu} from "semantic-ui-react";
 
-import {
-  Checkbox,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Menu,
-  Segment,
-  Sidebar,
-} from 'semantic-ui-react'
-
-const SidebarExampleDimmed = () => {
-  const [visible, setVisible] = React.useState(false)
-
+function Cart() {
   return (
-    <Grid columns={1}>
-      <Grid.Column>
-        <Checkbox
-          checked={visible}
-          label={{ children: <code>visible</code> }}
-          onChange={(e, data) => setVisible(data.checked)}
-        />
-      </Grid.Column>
-
-      <Grid.Column>
-        <Sidebar.Pushable as={Segment}>
-          <Sidebar
-            as={Menu}
-            animation='overlay'
-            icon='labeled'
-            inverted
-            onHide={() => setVisible(false)}
-            vertical
-            visible={visible}
-            width='thin'
-          >
+    // Simple Sample Items
+    <>
             <Menu.Item as='a'>
               <Icon name='home' />
               Home
@@ -48,18 +17,7 @@ const SidebarExampleDimmed = () => {
               <Icon name='camera' />
               Channels
             </Menu.Item>
-          </Sidebar>
+    </>
+  );}
 
-          <Sidebar.Pusher dimmed={visible}>
-            <Segment basic>
-              <Header as='h3'>Application Content</Header>
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </Grid.Column>
-    </Grid>
-  )
-}
-
-export default SidebarExampleDimmed
+export default Cart;
