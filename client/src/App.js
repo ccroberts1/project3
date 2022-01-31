@@ -37,8 +37,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <MediaContextProvider>
-        <NavBar leftItems={leftItems}></NavBar>
-        <ProductList></ProductList>
+        <NavBar leftItems={leftItems} children={<ProductList></ProductList>}></NavBar>
       </MediaContextProvider>
     </ApolloProvider>
   );
