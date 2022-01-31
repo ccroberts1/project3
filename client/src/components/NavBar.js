@@ -2,13 +2,12 @@ import React from 'react';
 import SignInModal from './SignInModal';
 import SignUpModal from './SignUpModal';
 import { Media} from "../utils/MediaContextProvider"
-import { Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
 
 
 const NavBarMobile = (props) => {
   const {
-    children,
     leftItems,
     onPusherClick,
     onToggle,
@@ -23,7 +22,7 @@ const NavBarMobile = (props) => {
         icon="labeled"
         inverted
         items={leftItems}
-        vertical
+        direction='right'
         visible={visible}
       />
       <Sidebar.Pusher
@@ -32,7 +31,7 @@ const NavBarMobile = (props) => {
         style={{ minHeight: "100vh" }}
       >
         <Menu fixed="top" inverted>
-          <Menu.Item onClick={onToggle}>
+          <Menu.Item>
             <Icon name="sidebar" />
           </Menu.Item>
           <Menu.Menu position="right">
@@ -42,37 +41,60 @@ const NavBarMobile = (props) => {
             <Menu.Item>
                 <SignUpModal></SignUpModal>
             </Menu.Item>
+            <Menu.Item as="a"  onClick={onToggle}>
+                <Icon name='shopping cart'></Icon>
+            </Menu.Item>
           </Menu.Menu>
+          
         </Menu>
-        {children}
       </Sidebar.Pusher>
     </Sidebar.Pushable>
   );
 };
 
 const NavBarDesktop = (props) => {
-  const { leftItems} = props;
+  const { 
+    leftItems,
+    onPusherClick,
+    onToggle,
+    visible
+  } = props;
 
   return (
-    <Menu fixed="top" inverted>
-
-
-      {leftItems.map((item) => (
-        <Menu.Item {...item} />
-      ))}
-
-        <Menu.Menu position="right">
+    <Sidebar.Pushable>
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        icon="labeled"
+        inverted
+        items={leftItems}
+        direction='right'
+        visible={visible}
+      />
+      <Sidebar.Pusher
+        dimmed={visible}
+        onClick={onPusherClick}
+        style={{ minHeight: "100vh" }}
+      >
+        <Menu fixed="top" inverted>
+                  {leftItems.map((item) => (
+                  <Menu.Item {...item} />
+         ))}
+          <Menu.Menu position="right">
             <Menu.Item as="a">
                 <SignInModal></SignInModal>
-              </Menu.Item>
-              <Menu.Item as="a">
-                  <SignUpModal></SignUpModal>
-              </Menu.Item>
-              <Menu.Item as="a">
-                  <Icon name='shopping cart'></Icon>
-              </Menu.Item>
-      </Menu.Menu>
-    </Menu>
+            </Menu.Item>
+            <Menu.Item as="a">
+                <SignUpModal></SignUpModal>
+            </Menu.Item>
+            <Menu.Item as="a"  onClick={onToggle}>
+                <Icon name='shopping cart'></Icon>
+            </Menu.Item>
+          </Menu.Menu>
+          
+        </Menu>
+      </Sidebar.Pusher>
+    </Sidebar.Pushable>
   );
 };
 
@@ -92,7 +114,7 @@ class NavBar extends React.Component {
   handleToggle = () => this.setState({ visible: !this.state.visible });
 
   render() {
-    const { children, leftItems, rightItems } = this.props;
+    const {leftItems} = this.props;
     const { visible } = this.state;
 
     return (
@@ -102,13 +124,16 @@ class NavBar extends React.Component {
             leftItems={leftItems}
             onPusherClick={this.handlePusher}
             onToggle={this.handleToggle}
-            rightItems={rightItems}
             visible={visible}
           > 
           </NavBarMobile>
         </Media>
         <Media greaterThan="mobile">
-          <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
+          <NavBarDesktop
+            leftItems={leftItems}
+            onPusherClick={this.handlePusher}
+            onToggle={this.handleToggle}
+            visible={visible}/>
         </Media>
       </div>
     );

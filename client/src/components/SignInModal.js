@@ -19,14 +19,14 @@ function SignInModal() {
                 <Form>
                      <Form.Field>
                             <label>Email</label>
-                                <Input fluid iconPosition='left' placeholder='Email'>
+                                <Input iconPosition='left' placeholder='Email'>
                                     <Icon name='at' />
                                     <input />
                                 </Input>
                         </Form.Field>
                         <Form.Field>
                             <label>Password</label>
-                            <input fluid placeholder='Password' />
+                            <input placeholder='Password' />
                     </Form.Field>
                     </Form>    
                     </Modal.Description>
