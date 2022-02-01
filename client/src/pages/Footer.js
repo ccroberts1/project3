@@ -11,9 +11,11 @@ const Footer = () => {
                 textAlign: "center",
                 marginTop: "25px"
             }}>
-                Raining Cats & Dogs
+                Links
             </h1>
+            <br></br>
                 <NavLink href="https://github.com/ccroberts1/project3.git">Github Repo</NavLink>
+                <br></br>
                 <NavLink href="https://raining-cats-and-dogs.herokuapp.com/">Heroku Deployed</NavLink>
         </Container>
     );
