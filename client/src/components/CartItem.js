@@ -1,6 +1,7 @@
 import { useStoreContext } from "../utils/StoreContext";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
 import { idbPromise } from "../utils/helpers";
+import { Icon, Menu, Sidebar, Dropdown, Container, Input } from "semantic-ui-react";
 
 const CartItem = ({ item }) => {
   const [, dispatch] = useStoreContext();
@@ -33,32 +34,27 @@ const CartItem = ({ item }) => {
 
   return (
     // restyle but maintain functionality
-    <div className="flex-row">
+    <Menu.Item className="flex-row">
+      {/* <div>
+        <img src={item.image} alt="" />
+      </div> */}
       <div>
-        <img src={`/images/${item.image}`} alt="" />
-      </div>
-      <div>
-        <div>
-          {item.name}, ${item.price}
-        </div>
+        <Menu.Item>
+          {item.name} ${item.price}
+        </Menu.Item>
         <div>
           <span>Qty:</span>
-          <input
+          <Input
+            size="small"
             type="number"
             placeholder="1"
             value={item.purchaseQuantity}
             onChange={onChange}
           />
-          <span
-            role="img"
-            aria-label="trash"
-            onClick={() => removeFromCart(item)}
-          >
-            🗑️
-          </span>
+          <Icon name="trash alternate outline"  onClick={() => removeFromCart(item)} />
         </div>
       </div>
-    </div>
+    </Menu.Item>
   );
 };
 
