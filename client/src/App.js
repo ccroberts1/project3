@@ -1,6 +1,7 @@
 import NavBar from "./components/NavBar";
 import ProductList from "./pages/ProductList";
 import { MediaContextProvider } from "./utils/MediaContextProvider";
+import { StoreProvider } from "./utils/StoreContext";
 import {
   ApolloClient,
   InMemoryCache,
@@ -37,7 +38,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <MediaContextProvider>
-        <NavBar leftItems={leftItems} children={<ProductList></ProductList>}></NavBar>
+        <StoreProvider>
+          <NavBar
+            leftItems={leftItems}
+            children={<ProductList></ProductList>}
+          ></NavBar>
+        </StoreProvider>
       </MediaContextProvider>
     </ApolloProvider>
   );
