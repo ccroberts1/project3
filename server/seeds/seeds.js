@@ -1,15 +1,25 @@
 const userData = require("./userData.json");
 const mongoose = require('mongoose');
 const connection = require('../config/connection')
-const { Product, User } = require('../models')
+const { Product, User, Category } = require('../models')
 // const db = require('../config/connection').mongoURI;
 const fetch = require('node-fetch')
+// const CreateCategories = require("./categorySeed")
 
 let resultData;
 // let saveCounter = 0;
 
+// CreateCategories()
 
 connection.once('open', async () => {
+
+
+    await Category.deleteMany()
+    const categoryData = await Category.insertMany([{ name: 'dogs' }, { name: 'cats' }])
+    console.log(categoryData)
+
+    
+
     await User.deleteMany({});
     const users = await User.insertMany(userData)
     console.log("Users seeded");
@@ -52,7 +62,7 @@ connection.once('open', async () => {
                     const image = resultData[i]['url'];
                     const price = `${Math.floor(Math.random() * 100) + 1}`;
                     const quantity = `${Math.floor(Math.random() * 10) + 1}`;
-                    const category = '61f85380462540330ae499f5'
+                    const category = categoryData[0]._id
                     
                     productData.push({
                         name,
@@ -100,7 +110,7 @@ connection.once('open', async () => {
                     const image = resultData[i]['url'];
                     const price = `${(Math.floor(Math.random() * 100)) + 1}`;
                     const quantity = `${(Math.floor(Math.random() * 10)) + 1}`;
-                    const category = '61f85380462540330ae499f5'
+                    const category = categoryData[1]._id
                     
                     productData.push({
                         name,

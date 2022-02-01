@@ -6,18 +6,41 @@ import {
   Icon,
   Dropdown,
   Button,
-  GridColumn,
+  Input
 } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { QUERY_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
+import Auth from "../utils/auth"
 
 function ProductList() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
-  console.log(data);
-  const products = data?.products || [];
+
+  let chosenCategory = ""
+
+  const handleCategorySelect = (event) => {
+    event.preventDefault();
+    console.log(event.target.id)
+    chosenCategory = event.target.id
+    
+  }
+
+  const { data: product_data } = useQuery(QUERY_PRODUCTS, {
+    variables: {category: chosenCategory}
+  });
+  console.log(product_data);
+  const products = product_data?.products || [];
+
+  const { data: category_data } = useQuery(QUERY_CATEGORIES);
+  const categories = category_data?.categories || [];
+  console.log(category_data)
+
+  // const productQuantity;
+  // if ()
+
   return (
-    <Grid centered center aligned columns={4} divided="vertically">
-      <Grid.Column>Product List</Grid.Column>
+    <Grid centered columns={4} divided="vertically">
+      <Grid.Column width={8}>
+        <Input fluid icon='search' placeholder='Search...' />
+      </Grid.Column>
       <Grid.Column>
         <Dropdown
           text="Filter"
@@ -28,34 +51,51 @@ function ProductList() {
           className="icon"
         >
           <Dropdown.Menu>
-            <Dropdown.Header icon="tags" content="Filter by tag" />
-            <Dropdown.Item>Cats</Dropdown.Item>
-            <Dropdown.Item>Dogs</Dropdown.Item>
+            <Dropdown.Header icon="tags" content="Categories" />
+            {categories.map((category) => (
+              <>
+                <Dropdown.Item
+                  style={{ textTransform: 'capitalize' }}
+                  description="10"
+                  id={category._id}
+                  onClick={handleCategorySelect}
+                  text={category.name}>
+                    {category.name}
+                </Dropdown.Item>
+              </>
+              ))}
           </Dropdown.Menu>
         </Dropdown>
       </Grid.Column>
 
       {/* Create Cards from Seeds with Image, Name, Description, Price, Quantity and Category */}
 
-      <Grid.Row columns={4}>
+      <Grid.Row  stretched columns={4}>
         {products.map((product) => (
           <Grid.Column>
             <Card>
               <Image src={product.image} wrapped ui={false} />
               <Card.Content>
                 <Card.Header>{product.name}</Card.Header>
-                <Card.Description>{product.description}</Card.Description>
+                {/* <Card.Description>{product.description}</Card.Description> */}
               </Card.Content>
               <Card.Content>
                 <Card.Meta>Quantity Left: {product.quantity}</Card.Meta>
               </Card.Content>
+
               <Card.Content extra>
-                <a>
+                <Grid columns={2} style={{ margin: "1px" }}>
+                <Grid.Column verticalAlign='middle'> 
                   <Icon name="dollar sign" />
                   {product.price}
-                </a>
-                <Button>Add to Cart</Button>
+                </Grid.Column>
+
+                </Grid>
+                
               </Card.Content>
+                {Auth.loggedIn() ? (
+                  <Button>Add to Cart</Button>
+                  ) : (<Button>Sign in to Purchase</Button>)}
             </Card>
           </Grid.Column>
         ))}
