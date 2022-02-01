@@ -1,13 +1,18 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { Grid, Image, Card, Icon, Dropdown } from "semantic-ui-react";
-import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import {
+  Grid,
+  Image,
+  Card,
+  Icon,
+  Dropdown,
+  Button,
+  GridColumn,
+} from "semantic-ui-react";
 
 function ProductList() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
   console.log(data);
   const products = data?.products || [];
-
   return (
     <Grid centered center aligned columns={4} divided="vertically">
       <Grid.Column>Product List</Grid.Column>
@@ -47,6 +52,7 @@ function ProductList() {
                   <Icon name="dollar sign" />
                   {product.price}
                 </a>
+                <Button>Add to Cart</Button>
               </Card.Content>
             </Card>
           </Grid.Column>
