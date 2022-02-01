@@ -110,7 +110,7 @@ const NavBarDesktop = (props) => {
         visible={visible}
         vertical
       >
-        <h1>weeeee</h1>
+        <Cart></Cart>
       </Sidebar>
       <Sidebar.Pusher
         dimmed={visible}
