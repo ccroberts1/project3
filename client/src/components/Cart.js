@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { Icon, Menu } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLazyQuery } from "@apollo/client";
-import { QUERY_CHECKOUT } from "../../utils/queries";
-import { idbPromise } from "../../utils/helpers";
+import { QUERY_CHECKOUT } from "../utils/queries";
+import { idbPromise } from "../utils/helpers";
 import CartItem from "../CartItem";
-import Auth from "../../utils/auth";
-import { useStoreContext } from "../../utils/StoreContext";
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
+import Auth from "../utils/auth";
+import { useStoreContext } from "../utils/StoreContext";
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../utils/actions";
 
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx"); //Needs our stripe key?
 
