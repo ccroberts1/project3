@@ -1,17 +1,12 @@
 import React from "react";
 import {
   Grid,
-  Image,
-  Card,
-  Icon,
   Dropdown,
-  Button,
   Input
 } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
-import Auth from "../utils/auth"
-import SignInModal from '../components/SignInModal';
+import ProductItem from "../components/ProductItem";
 
 function ProductList() {
 
@@ -29,10 +24,10 @@ function ProductList() {
   console.log(category_data)
 
   
-  const options = [
-  { key: 1, text: 'Price: Low to High ', value: 1 },
-  { key: 2, text: 'Price: High to Low', value: 2 }
-]
+//   const options = [
+//   { key: 1, text: 'Price: Low to High ', value: 1 },
+//   { key: 2, text: 'Price: High to Low', value: 2 }
+// ]
 
 
   return (
@@ -96,34 +91,13 @@ function ProductList() {
 
       <Grid.Row  stretched columns={4}>
         {products.map((product) => (
-          <Grid.Column>
-            <Card key={product._id}>
-              <Image src={product.image} wrapped ui={false} />
-              <Card.Content>
-                <Card.Header>{product.name}</Card.Header>
-                {/* <Card.Description>{product.description}</Card.Description> */}
-              </Card.Content>
-
-              <Card.Content extra>
-                <Grid columns={2} style={{ margin: "1px" }}>
-                <Grid.Column verticalAlign='middle'> 
-                  <Icon name="dollar sign" />
-                  {product.price}
-                  </Grid.Column>
-                  <Grid.Column verticalAlign='middle'> 
-                    {product.quantity === 0 ? (<Card.Meta style={{color: "red"}}>Out of Stock</Card.Meta>) :
-                      product.quantity === 1 ? (<Card.Meta style={{color: "red"}}>Only One Left</Card.Meta>) :
-                      (<Card.Meta>Quantity: {product.quantity}</Card.Meta>)}
-                    
-                  </Grid.Column>
-                </Grid>
-                
-              </Card.Content>
-                {Auth.loggedIn() ? (
-                  <Button>Add to Cart</Button>
-                  ) : (<Button><SignInModal></SignInModal> to Purchase</Button>)}
-            </Card>
-          </Grid.Column>
+          <ProductItem key={product._id}
+              _id={product._id}
+              image={product.image}
+              name={product.name}
+              price={product.price}
+              quantity={product.quantity}
+          />
         ))}
       </Grid.Row>
     </Grid>
@@ -131,3 +105,5 @@ function ProductList() {
 }
 
 export default ProductList;
+
+

@@ -33,7 +33,7 @@ const NavBarMobile = (props) => {
         visible={visible}
         vertical
       >
-        <Cart></Cart>
+     <h1>weeeee</h1>
       </Sidebar>
       <Sidebar.Pusher
         dimmed={visible}
@@ -110,7 +110,7 @@ const NavBarDesktop = (props) => {
         visible={visible}
         vertical
       >
-        <Cart></Cart>
+        <h1>weeeee</h1>
       </Sidebar>
       <Sidebar.Pusher
         dimmed={visible}
@@ -145,8 +145,10 @@ const NavBarDesktop = (props) => {
             </Menu.Menu>
           ) : (
               <Menu.Menu position="right">
-                <Menu.Item as="a">
-                    <SignInModal></SignInModal>
+                <Menu.Item style={{padding: 0}} as="a">
+                  <SignInModal backgroundcolor="transparent"
+                    textcolor="#c8c8c8"
+                  text="Sign In"></SignInModal>
                 </Menu.Item>
                 <Menu.Item as="a">
                     <SignUpModal></SignUpModal>
