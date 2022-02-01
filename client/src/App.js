@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar";
+import { BrowserRouter as Router } from "react-router-dom";
 import ProductList from "./pages/ProductList";
 import { MediaContextProvider } from "./utils/MediaContextProvider";
 import { StoreProvider } from "./utils/StoreContext";
@@ -11,8 +12,8 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 const leftItems = [
-  { as: "a", content: "Home", key: "home" },
-  { as: "a", content: "ProductList", key: "ProductList" },
+  { as: "a", content: "Home", key: "home", href: "/" },
+  { as: "a", content: "ProductList", key: "ProductList", href: "/ProductList" },
 ];
 
 const httpLink = createHttpLink({
@@ -36,18 +37,18 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-              <StoreProvider>
-      <MediaContextProvider>
-
-          <NavBar
-            leftItems={leftItems}
-            children={<ProductList></ProductList>}
-          ></NavBar>
-
-        </MediaContextProvider>
+    <Router>
+      <ApolloProvider client={client}>
+        <StoreProvider>
+          <MediaContextProvider>
+            <NavBar
+              leftItems={leftItems}
+              children={<ProductList></ProductList>}
+            ></NavBar>
+          </MediaContextProvider>
         </StoreProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </Router>
   );
 }
 
