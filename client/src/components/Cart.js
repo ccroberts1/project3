@@ -1,3 +1,4 @@
+
 // import { useEffect } from "react";
 // import { Icon, Menu } from "semantic-ui-react";
 // import { loadStripe } from "@stripe/stripe-js";
@@ -65,6 +66,7 @@
 //       <div className="cart-closed" onClick={toggleCart}>
 //         <span role="img" aria-label="trash">
 //           🛒
+
 //         </span>
 //       </div>
 //     );
