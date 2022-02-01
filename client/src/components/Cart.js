@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Icon, Menu } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -69,6 +70,7 @@ function Cart() {
       </div>
     );
   }
+
 
 //   return (
 //     // Simple Sample Items
