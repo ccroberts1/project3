@@ -8,6 +8,8 @@ import {
   Button,
   GridColumn,
 } from "semantic-ui-react";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_PRODUCTS } from "../utils/queries";
 
 function ProductList() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
