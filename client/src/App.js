@@ -37,14 +37,16 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+              <StoreProvider>
       <MediaContextProvider>
-        <StoreProvider>
+
           <NavBar
             leftItems={leftItems}
             children={<ProductList></ProductList>}
           ></NavBar>
+
+        </MediaContextProvider>
         </StoreProvider>
-      </MediaContextProvider>
     </ApolloProvider>
   );
 }

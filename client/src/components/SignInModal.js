@@ -4,12 +4,18 @@ import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function SignInModal() {
+function SignInModal(props) {
   const [open, setOpen] = React.useState(false);
   const [formState, setFormState] = React.useState({
     email: "",
     password: "",
   });
+
+  const {
+    backgroundcolor,
+    text,
+    textcolor
+  } = props
 
   const [login, { error }] = useMutation(LOGIN);
 
@@ -44,7 +50,7 @@ function SignInModal() {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<a>Sign In</a>}
+      trigger={<Button style={{ height: "100%", width: "100%", border: 0, background: backgroundcolor, color: textcolor }}>{text }</Button>}
     >
       <Modal.Header>Sign In</Modal.Header>
       <Modal.Content image>
