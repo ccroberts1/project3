@@ -51,28 +51,6 @@ function ProductList() {
             </Card>
           </Grid.Column>
         ))}
-
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
-        <Grid.Column>
-          <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-        </Grid.Column>
       </Grid.Row>
     </Grid>
   );
