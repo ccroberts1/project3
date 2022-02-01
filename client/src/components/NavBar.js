@@ -9,6 +9,7 @@ import ProductList from "../pages/ProductList";
 import Cart from "./Cart";
 import Footer from "../pages/Footer";
 import Home from "../pages/Home";
+import Account from "../pages/Account";
 
 const NavBarMobile = (props) => {
   const { leftItems, onPusherClick, onToggle, visible } = props;
@@ -44,7 +45,7 @@ const NavBarMobile = (props) => {
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
               <Menu.Item onClick={logout}>Sign Out</Menu.Item>
-              <Menu.Item>
+              <Menu.Item as="a" href="/Account" content="Account" key="account">
                 {/* <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
                     <Dropdown.Item>
@@ -73,12 +74,9 @@ const NavBarMobile = (props) => {
         </Menu>
         <Container style={{ marginTop: "50px" }}>
           <Routes>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/ProductList">
-              <ProductList />
-            </Route>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/ProductList" element={<ProductList />} />
+            <Route exact path="/Account" element={<Account />} />
           </Routes>
         </Container>
       </Sidebar.Pusher>
@@ -120,7 +118,7 @@ const NavBarDesktop = (props) => {
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
               <Menu.Item onClick={logout}>Sign Out</Menu.Item>
-              <Menu.Item>
+              <Menu.Item as="a" href="/Account" content="Account" key="account">
                 {/* <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
                     <Dropdown.Item>
@@ -155,6 +153,7 @@ const NavBarDesktop = (props) => {
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/ProductList" element={<ProductList />}></Route>
+            <Route exact path="/Account" element={<Account />}></Route>
           </Routes>
           <Footer />
         </Container>
