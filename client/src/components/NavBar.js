@@ -1,99 +1,17 @@
-import React from 'react';
-import SignInModal from './SignInModal';
-import SignUpModal from './SignUpModal';
-import { Media} from "../utils/MediaContextProvider"
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import SignInModal from "./SignInModal";
+import SignUpModal from "./SignUpModal";
+import { Media } from "../utils/MediaContextProvider";
 import { Icon, Menu, Sidebar, Dropdown, Container } from "semantic-ui-react";
-import Auth from "../utils/auth"
+import Auth from "../utils/auth";
 import ProductList from "../pages/ProductList";
 import Cart from "./Cart";
 import Footer from "../pages/Footer";
-import Home from "../pages/Home"
-
+import Home from "../pages/Home";
 
 const NavBarMobile = (props) => {
-  const {
-    leftItems,
-    onPusherClick,
-    onToggle,
-    visible
-  } = props;
-  
-    const logout = (event) => {
-    event.preventDefault();
-    Auth.logout();
-  };
-
-  return (
-    <Sidebar.Pushable>
-      <Sidebar
-        as={Menu}
-        animation="overlay"
-        icon="labeled"
-        inverted
-        direction='right'
-        visible={visible}
-        vertical
-      >
-     <h1>weeeee</h1>
-      </Sidebar>
-      <Sidebar.Pusher
-        dimmed={visible}
-        onClick={onPusherClick}
-        style={{ minHeight: "100vh" }}
-      >
-        <Menu fixed="top" inverted>
-                  {leftItems.map((item) => (
-                  <Menu.Item {...item} />
-         ))}
-          
-          {Auth.loggedIn() ? (
-            <Menu.Menu position="right">
-              <Menu.Item onClick={logout}>
-                Sign Out
-              </Menu.Item>
-              <Menu.Item>
-                {/* <Dropdown text='Account' pointing className='link item'>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>
-                      Order History
-                    </Dropdown.Item>
-                    <Dropdown.Item>Account Settings</Dropdown.Item>
-                    <Dropdown.Item>Sign Out</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown> */}
-                Account
-              </Menu.Item>
-              <Menu.Item as="a"  onClick={onToggle}>
-                    <Icon name='shopping cart'></Icon>
-              </Menu.Item>
-            </Menu.Menu>
-          ) : (
-              <Menu.Menu position="right">
-                <Menu.Item as="a">
-                    <SignInModal></SignInModal>
-                </Menu.Item>
-                <Menu.Item as="a">
-                    <SignUpModal></SignUpModal>
-                </Menu.Item>
-              </Menu.Menu>
-            )}
-          
-        </Menu>
-        <Container   style={{ marginTop: "50px" }}>
-          <ProductList />
-        </Container>
-      </Sidebar.Pusher>
-    </Sidebar.Pushable>
-  );
-};
-
-const NavBarDesktop = (props) => {
-  const { 
-    leftItems,
-    onPusherClick,
-    onToggle,
-    visible,
-  } = props;
+  const { leftItems, onPusherClick, onToggle, visible } = props;
 
   const logout = (event) => {
     event.preventDefault();
@@ -107,11 +25,11 @@ const NavBarDesktop = (props) => {
         animation="overlay"
         icon="labeled"
         inverted
-        direction='right'
+        direction="right"
         visible={visible}
         vertical
       >
-        <Cart></Cart>
+        <h1>weeeee</h1>
       </Sidebar>
       <Sidebar.Pusher
         dimmed={visible}
@@ -119,15 +37,13 @@ const NavBarDesktop = (props) => {
         style={{ minHeight: "100vh" }}
       >
         <Menu fixed="top" inverted>
-                  {leftItems.map((item) => (
-                  <Menu.Item {...item} />
-         ))}
-          
+          {leftItems.map((item) => (
+            <Menu.Item {...item} />
+          ))}
+
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
-              <Menu.Item onClick={logout}>
-                Sign Out
-              </Menu.Item>
+              <Menu.Item onClick={logout}>Sign Out</Menu.Item>
               <Menu.Item>
                 {/* <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
@@ -140,37 +56,116 @@ const NavBarDesktop = (props) => {
                 </Dropdown> */}
                 Account
               </Menu.Item>
-              <Menu.Item as="a"  onClick={onToggle}>
-                    <Icon name='shopping cart'></Icon>
+              <Menu.Item as="a" onClick={onToggle}>
+                <Icon name="shopping cart"></Icon>
               </Menu.Item>
             </Menu.Menu>
           ) : (
-              <Menu.Menu position="right">
-                <Menu.Item style={{padding: 0}} as="a">
-                  <SignInModal backgroundcolor="transparent"
-                    textcolor="#c8c8c8"
-                  text="Sign In"></SignInModal>
-                </Menu.Item>
-                <Menu.Item as="a">
-                    <SignUpModal></SignUpModal>
-                </Menu.Item>
-              </Menu.Menu>
-            )}
-          
+            <Menu.Menu position="right">
+              <Menu.Item as="a">
+                <SignInModal></SignInModal>
+              </Menu.Item>
+              <Menu.Item as="a">
+                <SignUpModal></SignUpModal>
+              </Menu.Item>
+            </Menu.Menu>
+          )}
         </Menu>
-        <Container   style={{ marginTop: "50px" }}>
-          <ProductList />
+        <Container style={{ marginTop: "50px" }}>
+          <Routes>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/ProductList">
+              <ProductList />
+            </Route>
+          </Routes>
         </Container>
       </Sidebar.Pusher>
     </Sidebar.Pushable>
   );
 };
 
+const NavBarDesktop = (props) => {
+  const { leftItems, onPusherClick, onToggle, visible } = props;
 
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
+  return (
+    <Sidebar.Pushable>
+      <Sidebar
+        as={Menu}
+        animation="overlay"
+        icon="labeled"
+        inverted
+        direction="right"
+        visible={visible}
+        vertical
+      >
+        <Cart></Cart>
+      </Sidebar>
+      <Sidebar.Pusher
+        dimmed={visible}
+        onClick={onPusherClick}
+        style={{ minHeight: "100vh" }}
+      >
+        <Menu fixed="top" inverted>
+          {leftItems.map((item) => (
+            <Menu.Item {...item} />
+          ))}
+
+          {Auth.loggedIn() ? (
+            <Menu.Menu position="right">
+              <Menu.Item onClick={logout}>Sign Out</Menu.Item>
+              <Menu.Item>
+                {/* <Dropdown text='Account' pointing className='link item'>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      Order History
+                    </Dropdown.Item>
+                    <Dropdown.Item>Account Settings</Dropdown.Item>
+                    <Dropdown.Item>Sign Out</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown> */}
+                Account
+              </Menu.Item>
+              <Menu.Item as="a" onClick={onToggle}>
+                <Icon name="shopping cart"></Icon>
+              </Menu.Item>
+            </Menu.Menu>
+          ) : (
+            <Menu.Menu position="right">
+              <Menu.Item style={{ padding: 0 }} as="a">
+                <SignInModal
+                  backgroundcolor="transparent"
+                  textcolor="#c8c8c8"
+                  text="Sign In"
+                ></SignInModal>
+              </Menu.Item>
+              <Menu.Item as="a">
+                <SignUpModal></SignUpModal>
+              </Menu.Item>
+            </Menu.Menu>
+          )}
+        </Menu>
+        <Container style={{ marginTop: "50px" }}>
+          <Routes>
+            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/ProductList" element={<ProductList />}></Route>
+          </Routes>
+          <Footer />
+        </Container>
+      </Sidebar.Pusher>
+    </Sidebar.Pushable>
+  );
+};
 
 class NavBar extends React.Component {
   state = {
-    visible: false
+    visible: false,
   };
 
   handlePusher = () => {
@@ -182,7 +177,7 @@ class NavBar extends React.Component {
   handleToggle = () => this.setState({ visible: !this.state.visible });
 
   render() {
-    const {leftItems} = this.props;
+    const { leftItems } = this.props;
     const { visible } = this.state;
 
     return (
@@ -193,20 +188,19 @@ class NavBar extends React.Component {
             onPusherClick={this.handlePusher}
             onToggle={this.handleToggle}
             visible={visible}
-          > 
-          </NavBarMobile>
+          ></NavBarMobile>
         </Media>
         <Media greaterThan="mobile">
           <NavBarDesktop
             leftItems={leftItems}
             onPusherClick={this.handlePusher}
             onToggle={this.handleToggle}
-            visible={visible}/>
+            visible={visible}
+          />
         </Media>
       </div>
     );
   }
 }
-
 
 export default NavBar;
