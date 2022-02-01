@@ -4,10 +4,12 @@ const connection = require('../config/connection')
 const { Product, User } = require('../models')
 // const db = require('../config/connection').mongoURI;
 const fetch = require('node-fetch')
+const CreateCategories = require("./categorySeed")
 
 let resultData;
 // let saveCounter = 0;
 
+CreateCategories()
 
 connection.once('open', async () => {
     await User.deleteMany({});

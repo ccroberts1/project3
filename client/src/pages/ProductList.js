@@ -6,18 +6,21 @@ import {
   Icon,
   Dropdown,
   Button,
-  GridColumn,
+  Input
 } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import Auth from "../utils/auth"
 
 function ProductList() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
   console.log(data);
   const products = data?.products || [];
   return (
-    <Grid centered center aligned columns={4} divided="vertically">
-      <Grid.Column>Product List</Grid.Column>
+    <Grid centered columns={4} divided="vertically">
+      <Grid.Column width={8}>
+        <Input fluid icon='search' placeholder='Search...' />
+      </Grid.Column>
       <Grid.Column>
         <Dropdown
           text="Filter"
@@ -37,7 +40,7 @@ function ProductList() {
 
       {/* Create Cards from Seeds with Image, Name, Description, Price, Quantity and Category */}
 
-      <Grid.Row columns={4}>
+      <Grid.Row  stretched columns={4}>
         {products.map((product) => (
           <Grid.Column>
             <Card>
@@ -49,13 +52,19 @@ function ProductList() {
               <Card.Content>
                 <Card.Meta>Quantity Left: {product.quantity}</Card.Meta>
               </Card.Content>
+
               <Card.Content extra>
-                <a>
+                <Grid columns={2} style={{ margin: "1px" }}>
+                <Grid.Column verticalAlign='middle'> 
                   <Icon name="dollar sign" />
                   {product.price}
-                </a>
-                <Button>Add to Cart</Button>
+                </Grid.Column>
+                {Auth.loggedIn() ? (
+                  <Button>Add to Cart</Button>
+                  ) : (<span>Sign in to Purchase</span>)}
+                </Grid>
               </Card.Content>
+
             </Card>
           </Grid.Column>
         ))}

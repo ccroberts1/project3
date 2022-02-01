@@ -4,11 +4,15 @@ const { Product, User, Category } = require('../models')
 // const db = require('../config/connection').mongoURI;
 const fetch = require('node-fetch')
 
-connection.once('open', async () => {
-    await Category.deleteMany()
-    console.log('connected')
+const CreateCategories = () => {
+    connection.once('open', async () => {
+        await Category.deleteMany()
+        console.log('connected')
 
-    const categoryData = [{name: 'dogs'}, {name: 'cats'}]
+        const categoryData = [{ name: 'dogs' }, { name: 'cats' }]
 
-    const category = await Category.insertMany(categoryData)
-})
+        const category = await Category.insertMany(categoryData)
+    })
+}
+
+module.exports = CreateCategories
