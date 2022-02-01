@@ -2,6 +2,9 @@ import React from 'react';
 import { Grid, Image, Card, Icon, Dropdown, Button, GridColumn } from 'semantic-ui-react'
 
 function ProductList() {
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+  console.log(data);
+  const products = data?.products || [];
   return (
     <Grid centered center aligned columns={4} divided='vertically'>
       <Grid.Column>Product List</Grid.Column>
@@ -26,45 +29,22 @@ function ProductList() {
     <Grid.Row columns={4}>
       <Grid.Column >
             <Card>
-    <Image src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*' wrapped ui={false} />
-    <Card.Content>
-      <Card.Header>Name</Card.Header>
-      <Card.Description>
-        Description
-              </Card.Description>
+              <Image src={product.image} wrapped ui={false} />
+              <Card.Content>
+                <Card.Header>{product.name}</Card.Header>
+                <Card.Description>{product.description}</Card.Description>
               </Card.Content>
-    <Card.Content>
-                    <Card.Meta>Quantity Left: </Card.Meta>
-    </Card.Content>
+              <Card.Content>
+                <Card.Meta>Quantity Left: {product.quantity}</Card.Meta>
+              </Card.Content>
     <Card.Content extra>
       <a>
         <Icon name='dollar sign' />
-        1000.00
+          {product.price}
       </a>
         <Button>Add to Cart</Button>
     </Card.Content>
   </Card>
-      </Grid.Column>
-      <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-        </Grid.Column>
-              <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-        </Grid.Column>
-            <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
       </Grid.Column>
     </Grid.Row>
   </Grid>
