@@ -9,13 +9,33 @@ import {
   Input
 } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { QUERY_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
 import Auth from "../utils/auth"
 
 function ProductList() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
-  console.log(data);
-  const products = data?.products || [];
+
+  let chosenCategory = ""
+
+  const handleCategorySelect = (event) => {
+    event.preventDefault();
+    console.log(event.target.id)
+    chosenCategory = event.target.id
+    
+  }
+
+  const { data: product_data } = useQuery(QUERY_PRODUCTS, {
+    variables: {category: chosenCategory}
+  });
+  console.log(product_data);
+  const products = product_data?.products || [];
+
+  const { data: category_data } = useQuery(QUERY_CATEGORIES);
+  const categories = category_data?.categories || [];
+  console.log(category_data)
+
+  // const productQuantity;
+  // if ()
+
   return (
     <Grid centered columns={4} divided="vertically">
       <Grid.Column width={8}>
@@ -31,9 +51,19 @@ function ProductList() {
           className="icon"
         >
           <Dropdown.Menu>
-            <Dropdown.Header icon="tags" content="Filter by tag" />
-            <Dropdown.Item>Cats</Dropdown.Item>
-            <Dropdown.Item>Dogs</Dropdown.Item>
+            <Dropdown.Header icon="tags" content="Categories" />
+            {categories.map((category) => (
+              <>
+                <Dropdown.Item
+                  style={{ textTransform: 'capitalize' }}
+                  description="10"
+                  id={category._id}
+                  onClick={handleCategorySelect}
+                  text={category.name}>
+                    {category.name}
+                </Dropdown.Item>
+              </>
+              ))}
           </Dropdown.Menu>
         </Dropdown>
       </Grid.Column>
@@ -47,7 +77,7 @@ function ProductList() {
               <Image src={product.image} wrapped ui={false} />
               <Card.Content>
                 <Card.Header>{product.name}</Card.Header>
-                <Card.Description>{product.description}</Card.Description>
+                {/* <Card.Description>{product.description}</Card.Description> */}
               </Card.Content>
               <Card.Content>
                 <Card.Meta>Quantity Left: {product.quantity}</Card.Meta>
@@ -59,12 +89,13 @@ function ProductList() {
                   <Icon name="dollar sign" />
                   {product.price}
                 </Grid.Column>
+
+                </Grid>
+                
+              </Card.Content>
                 {Auth.loggedIn() ? (
                   <Button>Add to Cart</Button>
-                  ) : (<span>Sign in to Purchase</span>)}
-                </Grid>
-              </Card.Content>
-
+                  ) : (<Button>Sign in to Purchase</Button>)}
             </Card>
           </Grid.Column>
         ))}
