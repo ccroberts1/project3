@@ -1,18 +1,26 @@
 import React from 'react';
-import { Grid, Image, Card, Icon, Dropdown, GridColumn } from 'semantic-ui-react'
+import { useQuery } from '@apollo/client';
+import { Grid, Image, Card, Icon, Dropdown} from 'semantic-ui-react'
+import {QUERY_ALL_PRODUCTS} from "../utils/queries"
 
 function ProductList() {
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+ console.log(data)
+
+
   return (
+    
+
     <Grid centered center aligned columns={4} divided='vertically'>
       <Grid.Column>Product List</Grid.Column>
       <Grid.Column>
         <Dropdown
-    text='Filter'
-    icon='filter'
-    floating
-    labeled
-    button
-    className='icon'
+          text='Filter'
+          icon='filter'
+          floating
+          labeled
+          button
+          className='icon'
   >
     <Dropdown.Menu>
       <Dropdown.Header icon='tags' content='Filter by tag' />
