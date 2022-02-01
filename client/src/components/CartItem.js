@@ -32,6 +32,7 @@ const CartItem = ({ item }) => {
   };
 
   return (
+    // restyle but maintain functionality
     <div className="flex-row">
       <div>
         <img src={`/images/${item.image}`} alt="" />

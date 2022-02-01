@@ -17,7 +17,8 @@ function Cart() {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {
-    if (data) {
+      if (data) {
+        console.log(data)
       stripePromise.then((res) => {
         res.redirectToCheckout({ sessionId: data.checkout.session });
       });
@@ -59,6 +60,7 @@ function Cart() {
     getCheckout({
       variables: { products: productIds },
     });
+    console.log(productIds)
   }
 
   if (!state.cartOpen) {
@@ -91,7 +93,8 @@ function Cart() {
 //   );
 // }
 
-return (
+    return (
+    // restyle but maintain functionality
   <div className="cart">
     <div className="close" onClick={toggleCart}>
       [close]
