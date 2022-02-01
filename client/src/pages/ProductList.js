@@ -40,7 +40,7 @@ function ProductList() {
                 <Card.Description>{product.description}</Card.Description>
               </Card.Content>
               <Card.Content>
-                <Card.Meta>Quantity Left: {product.description}</Card.Meta>
+                <Card.Meta>Quantity Left: {product.quantity}</Card.Meta>
               </Card.Content>
               <Card.Content extra>
                 <a>
