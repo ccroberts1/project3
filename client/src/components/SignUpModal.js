@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-function SignUpModal() {
+function SignUpModal(props) {
   const [open, setOpen] = React.useState(false);
   const [formState, setFormState] = React.useState({
     firstName: "",
@@ -13,6 +13,8 @@ function SignUpModal() {
     password: "",
     confirmPassword: "",
   });
+
+  const { backgroundcolor, text, textcolor } = props;
 
   const [addUser] = useMutation(ADD_USER);
 
@@ -44,7 +46,19 @@ function SignUpModal() {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<a>Sign Up</a>}
+      trigger={
+        <Button
+          style={{
+            height: "100%",
+            width: "100%",
+            border: 0,
+            background: backgroundcolor,
+            color: textcolor,
+          }}
+        >
+          {text}
+        </Button>
+      }
     >
       <Modal.Header>Sign Up for a New Account</Modal.Header>
       <Modal.Content>

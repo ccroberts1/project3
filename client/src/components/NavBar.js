@@ -10,6 +10,7 @@ import Cart from "./Cart";
 import Footer from "../pages/Footer";
 import Home from "../pages/Home";
 import Account from "../pages/Account";
+import Success from "../pages/Success";
 
 const NavBarMobile = (props) => {
   const { leftItems, onPusherClick, onToggle, visible } = props;
@@ -144,7 +145,11 @@ const NavBarDesktop = (props) => {
                 ></SignInModal>
               </Menu.Item>
               <Menu.Item as="a">
-                <SignUpModal></SignUpModal>
+                <SignUpModal
+                  backgroundcolor="transparent"
+                  textcolor="#c8c8c8"
+                  text="Sign Up"
+                ></SignUpModal>
               </Menu.Item>
             </Menu.Menu>
           )}
@@ -154,6 +159,7 @@ const NavBarDesktop = (props) => {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/ProductList" element={<ProductList />}></Route>
             <Route exact path="/Account" element={<Account />}></Route>
+            <Route exact path="/Success" element={<Success />}></Route>
           </Routes>
           <Footer />
         </Container>

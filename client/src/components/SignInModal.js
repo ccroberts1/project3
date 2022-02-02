@@ -11,11 +11,7 @@ function SignInModal(props) {
     password: "",
   });
 
-  const {
-    backgroundcolor,
-    text,
-    textcolor
-  } = props
+  const { backgroundcolor, text, textcolor } = props;
 
   const [login, { error }] = useMutation(LOGIN);
 
@@ -50,7 +46,19 @@ function SignInModal(props) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button style={{ height: "100%", width: "100%", border: 0, background: backgroundcolor, color: textcolor }}>{text }</Button>}
+      trigger={
+        <Button
+          style={{
+            height: "100%",
+            width: "100%",
+            border: 0,
+            background: backgroundcolor,
+            color: textcolor,
+          }}
+        >
+          {text}
+        </Button>
+      }
     >
       <Modal.Header>Sign In</Modal.Header>
       <Modal.Content image>

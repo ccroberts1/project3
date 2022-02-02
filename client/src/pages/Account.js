@@ -28,7 +28,7 @@ function Account() {
   async function submitNewInfo(event) {
     event.preventDefault();
     try {
-      const { data } = await updateUser({
+      const updatedUser = await updateUser({
         variables: {
           firstName: formState.firstName,
           lastName: formState.lastName,
