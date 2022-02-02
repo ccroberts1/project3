@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Icon, Menu, Button } from "semantic-ui-react";
+import { Menu, Button } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../utils/queries";
@@ -7,7 +7,7 @@ import { idbPromise } from "../utils/helpers";
 import CartItem from "./CartItem";
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/StoreContext";
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../utils/actions";
+import { ADD_MULTIPLE_TO_CART } from "../utils/actions";
 
 const stripePromise = loadStripe(
   "pk_test_51KMeBWA1XTMt9WgUQWw4VRGbdNl1eJlTDWx98cV8kPBrwkpGQrXzhVyLFZbutbQFZP6GJc9KwMvGkrfd8KhhbHr000suCUloro"
@@ -84,12 +84,11 @@ function Cart() {
           </Menu.Item>
         </div>
       ) : (
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
-        </h3>
+        <Menu.Item>
+
+       
+          Cart is empty, please add items to the cart to purchase.
+        </Menu.Item>
       )}
     </Menu.Item>
   );

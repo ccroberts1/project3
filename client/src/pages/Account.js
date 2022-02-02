@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Button, Form, Modal, Checkbox, Icon, Input } from "semantic-ui-react";
+import { Button, Form, Modal, Icon, Input } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { UPDATE_USER } from "../utils/mutations";
 
 function Account() {
   const [open, setOpen] = React.useState(false);
-  const { data, loading } = useQuery(QUERY_USER);
-  const userData = data?.user || {};
+  const { data } = useQuery(QUERY_USER);
+  // const userData = data?.user || {};
 
   const [formState, setFormState] = useState({
     firstName: data?.user?.firstName,
