@@ -31,10 +31,10 @@ function ProductList() {
 
 
   return (
-    <Grid centered columns={4} divided="vertically">
-      <Grid.Column width={8}>
+    <Grid columns={4} divided="vertically">
+      {/* <Grid.Column width={8}>
         <Input fluid icon='search' placeholder='Search...' />
-      </Grid.Column>
+      </Grid.Column> */}
      
          {/* <Grid.Column>
          <Dropdown

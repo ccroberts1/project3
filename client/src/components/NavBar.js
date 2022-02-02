@@ -7,7 +7,7 @@ import { Icon, Menu, Sidebar, Dropdown, Container } from "semantic-ui-react";
 import Auth from "../utils/auth";
 import ProductList from "../pages/ProductList";
 import Cart from "./Cart";
-import Footer from "../pages/Footer";
+import Footer from "./Footer";
 import Home from "../pages/Home";
 import Account from "../pages/Account";
 import Success from "../pages/Success";
