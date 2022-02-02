@@ -7,13 +7,13 @@ import { UPDATE_USER } from "../utils/mutations";
 function Account() {
   const { data, loading } = useQuery(QUERY_USER);
   const userData = data?.user || {};
-  //   console.log(userData);
+  console.log(userData);
   const [formState, setFormState] = useState({
     firstName: data?.user?.firstName,
     lastName: data?.user?.lastName,
     email: data?.user?.email,
   });
-  console.log(data);
+  //   console.log(data);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -48,17 +48,17 @@ function Account() {
         <form className="form">
           <input
             name="firstName"
-            placeholder="First Name"
+            placeholder={data?.user.firstName}
             onChange={handleInputChange}
           ></input>
           <input
             name="lastName"
-            placeholder="Last Name"
+            placeholder={data?.user.lastName}
             onChange={handleInputChange}
           ></input>
           <input
             name="email"
-            placeholder="Email"
+            placeholder={data?.user.email}
             onChange={handleInputChange}
           ></input>
           <button onClick={submitNewInfo}>Update Information</button>
