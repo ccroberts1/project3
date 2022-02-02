@@ -1,7 +1,7 @@
 import { useStoreContext } from "../utils/StoreContext";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
 import { idbPromise } from "../utils/helpers";
-import { Icon, Menu, Sidebar, Dropdown, Container, Input } from "semantic-ui-react";
+import { Icon, Menu, Input, Grid } from "semantic-ui-react";
 
 const CartItem = ({ item }) => {
   const [, dispatch] = useStoreContext();
@@ -40,18 +40,33 @@ const CartItem = ({ item }) => {
       </div> */}
       <div>
         <Menu.Item>
-          {item.name} ${item.price}
+          <Grid columns={2}>
+            <Grid.Column>
+              {item.name}
+              </Grid.Column>
+            <Grid.Column>
+            ${item.price}
+            </Grid.Column>
+          </Grid>
         </Menu.Item>
         <div>
-          <span>Qty:</span>
+          <Grid columns={3}style={{ margin: "1px" }}>
+            <Grid.Column verticalAlign='middle' width={2}> <span>Qty:</span></Grid.Column>
+            <Grid.Column>
           <Input
             size="small"
-            type="number"
+            // type="number"
             placeholder="1"
             value={item.purchaseQuantity}
-            onChange={onChange}
-          />
-          <Icon name="trash alternate outline"  onClick={() => removeFromCart(item)} />
+                onChange={onChange}
+                width={"50px"}
+              />
+            </Grid.Column>
+            <Grid.Column floated='right' verticalAlign='middle' >
+              <Icon name="trash alternate outline" onClick={() => removeFromCart(item)} />
+              </Grid.Column>
+            
+          </Grid>
         </div>
       </div>
     </Menu.Item>
