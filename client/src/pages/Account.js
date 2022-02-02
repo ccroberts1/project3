@@ -13,7 +13,7 @@ function Account() {
     lastName: data?.user?.lastName,
     email: data?.user?.email,
   });
-  console.log(formState);
+  console.log(data);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -48,17 +48,17 @@ function Account() {
         <form className="form">
           <input
             name="firstName"
-            placeholder={formState.firstName}
+            placeholder="First Name"
             onChange={handleInputChange}
           ></input>
           <input
             name="lastName"
-            value={formState.lastName}
+            placeholder="Last Name"
             onChange={handleInputChange}
           ></input>
           <input
             name="email"
-            value={formState.email}
+            placeholder="Email"
             onChange={handleInputChange}
           ></input>
           <button onClick={submitNewInfo}>Update Information</button>

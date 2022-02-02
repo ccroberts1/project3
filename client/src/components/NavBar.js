@@ -161,8 +161,8 @@ const NavBarDesktop = (props) => {
             <Route exact path="/Account" element={<Account />}></Route>
             <Route exact path="/Success" element={<Success />}></Route>
           </Routes>
-          <Footer />
         </Container>
+        <Footer />
       </Sidebar.Pusher>
     </Sidebar.Pushable>
   );
