@@ -46,7 +46,7 @@ const NavBarMobile = (props) => {
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
               <Menu.Item onClick={logout}>Sign Out</Menu.Item>
-              <Menu.Item as="a" href="/Account" content="Account" key="account">
+              <Menu.Item as="a">
                 {/* <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
                     <Dropdown.Item>
@@ -56,7 +56,7 @@ const NavBarMobile = (props) => {
                     <Dropdown.Item>Sign Out</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown> */}
-                Account
+                <Account />
               </Menu.Item>
               <Menu.Item as="a" onClick={onToggle}>
                 <Icon name="shopping cart"></Icon>
@@ -77,7 +77,7 @@ const NavBarMobile = (props) => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/ProductList" element={<ProductList />} />
-            <Route exact path="/Account" element={<Account />} />
+            <Route exact path="/Succes" element={<Success />} />
           </Routes>
         </Container>
       </Sidebar.Pusher>
@@ -119,7 +119,7 @@ const NavBarDesktop = (props) => {
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
               <Menu.Item onClick={logout}>Sign Out</Menu.Item>
-              <Menu.Item as="a" href="/Account" content="Account" key="account">
+              <Menu.Item style={{ padding: 0 }} as="a">
                 {/* <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
                     <Dropdown.Item>
@@ -129,7 +129,7 @@ const NavBarDesktop = (props) => {
                     <Dropdown.Item>Sign Out</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown> */}
-                Account
+                <Account />
               </Menu.Item>
               <Menu.Item as="a" onClick={onToggle}>
                 <Icon name="shopping cart"></Icon>
@@ -158,7 +158,6 @@ const NavBarDesktop = (props) => {
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/ProductList" element={<ProductList />}></Route>
-            <Route exact path="/Account" element={<Account />}></Route>
             <Route exact path="/Success" element={<Success />}></Route>
           </Routes>
         </Container>
