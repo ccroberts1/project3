@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Column, Icon } from "semantic-ui-react";
+import { Grid, Icon } from "semantic-ui-react";
 
 const Footer = () => {
   return (
@@ -7,11 +7,14 @@ const Footer = () => {
       style={{
         width: "100%",
         color: "#c8c8c8",
-        background: "#1b1c1d",
         textAlign: "center",
+        background: "#1b1c1d",
+        position: "fixed",
+        height: "40px",
+        bottom:"0"
       }}
     >
-      <Grid style={{height:"60px"}}>
+      <Grid style={{height:"60px", background: "#1b1c1d",}}>
       <Grid.Column  floated='left' width={3}>
       
         <a href="https://github.com/ccroberts1/project3.git">View this Project on Github <Icon name="github"></Icon></a>

@@ -1,17 +1,17 @@
 import React from "react";
 import {
   Grid,
-  Dropdown,
-  Input
+  Dropdown
 } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
 import ProductItem from "../components/ProductItem";
 
-function ProductList() {
+function ProductList(props) {
 
   let chosenCategory = ""
 
+  const { columnNumber } = props;
 
   const {data: product_data, refetch } = useQuery(QUERY_PRODUCTS, {
     variables: {category: chosenCategory}
@@ -89,7 +89,7 @@ function ProductList() {
 
       {/* Create Cards from Seeds with Image, Name, Description, Price, Quantity and Category */}
 
-      <Grid.Row  stretched columns={4}>
+      <Grid.Row  stretched columns={columnNumber}>
         {products.map((product) => (
           <ProductItem key={product._id}
               _id={product._id}
