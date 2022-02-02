@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 import { Media } from "../utils/MediaContextProvider";
-import { Icon, Menu, Sidebar, Dropdown, Container } from "semantic-ui-react";
+import { Icon, Menu, Sidebar, Container } from "semantic-ui-react";
 import Auth from "../utils/auth";
 import ProductList from "../pages/ProductList";
 import Cart from "./Cart";
@@ -31,14 +31,13 @@ const NavBarMobile = (props) => {
         visible={visible}
         vertical
       >
-        <h1>weeeee</h1>
+        <Cart></Cart>
       </Sidebar>
       <Sidebar.Pusher
         dimmed={visible}
         onClick={onPusherClick}
         style={{ minHeight: "100vh" }}
-      >
-        <Menu fixed="top" inverted>
+      >     <Menu fixed="top" inverted>
           {leftItems.map((item) => (
             <Menu.Item {...item} />
           ))}
@@ -64,22 +63,32 @@ const NavBarMobile = (props) => {
             </Menu.Menu>
           ) : (
             <Menu.Menu position="right">
-              <Menu.Item as="a">
-                <SignInModal></SignInModal>
+              <Menu.Item style={{ padding: 0 }} as="a">
+                <SignInModal
+                  backgroundcolor="transparent"
+                  textcolor="#c8c8c8"
+                  text="Sign In"
+                ></SignInModal>
               </Menu.Item>
-              <Menu.Item as="a">
-                <SignUpModal></SignUpModal>
+              <Menu.Item style={{ padding: 0 }} as="a">
+                <SignUpModal
+                  backgroundcolor="transparent"
+                  textcolor="#c8c8c8"
+                  text="Sign Up"
+                ></SignUpModal>
               </Menu.Item>
             </Menu.Menu>
           )}
         </Menu>
         <Container style={{ marginTop: "50px" }}>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/ProductList" element={<ProductList />} />
-            <Route exact path="/Account" element={<Account />} />
+            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/ProductList" element={<ProductList columnNumber={2} />}></Route>
+            <Route exact path="/Account" element={<Account />}></Route>
+            <Route exact path="/Success" element={<Success />}></Route>
           </Routes>
         </Container>
+        <Footer />
       </Sidebar.Pusher>
     </Sidebar.Pushable>
   );
@@ -157,7 +166,7 @@ const NavBarDesktop = (props) => {
         <Container style={{ marginTop: "50px" }}>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
-            <Route exact path="/ProductList" element={<ProductList />}></Route>
+            <Route exact path="/ProductList" element={<ProductList  columnNumber={4} />}></Route>
             <Route exact path="/Account" element={<Account />}></Route>
             <Route exact path="/Success" element={<Success />}></Route>
           </Routes>

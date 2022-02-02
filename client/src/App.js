@@ -13,7 +13,7 @@ import { setContext } from "@apollo/client/link/context";
 
 const leftItems = [
   { as: "a", content: "Home", key: "home", href: "/" },
-  { as: "a", content: "ProductList", key: "ProductList", href: "/ProductList" },
+  { as: "a", content: "Product List", key: "ProductList", href: "/ProductList" },
 ];
 
 const httpLink = createHttpLink({
