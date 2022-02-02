@@ -144,7 +144,7 @@ const NavBarDesktop = (props) => {
                   text="Sign In"
                 ></SignInModal>
               </Menu.Item>
-              <Menu.Item as="a">
+              <Menu.Item style={{ padding: 0 }} as="a">
                 <SignUpModal
                   backgroundcolor="transparent"
                   textcolor="#c8c8c8"
