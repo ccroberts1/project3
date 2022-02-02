@@ -28,18 +28,21 @@ const resolvers = {
       return await Product.findById(_id).populate("category");
     },
     user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findbyId(context.user._id).populate({
-          path: "orders.products",
-          populate: "category",
-        });
+      try {
+        if (context.user) {
+          const user = await User.findById(context.user._id).populate({
+            path: "orders.products",
+            populate: "category",
+          });
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+          user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+          return user;
+        }
 
-        return user;
+        throw new AuthenticationError("Not logged in");
+      } catch (err) {
+        console.log(err);
       }
-
-      throw new AuthenticationError("Not logged in");
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -144,6 +147,7 @@ const resolvers = {
       }
     },
     updateUser: async (parent, args, context) => {
+      console.log("update user");
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
           new: true,
