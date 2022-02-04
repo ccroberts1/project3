@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Menu, Button } from "semantic-ui-react";
+import { Menu, Button, Grid } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLazyQuery } from "@apollo/client";
 import { QUERY_CHECKOUT } from "../utils/queries";
@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 import Auth from "../utils/auth";
 import { useStoreContext } from "../utils/StoreContext";
 import { ADD_MULTIPLE_TO_CART } from "../utils/actions";
+
 
 const stripePromise = loadStripe(
   "pk_test_51KMeBWA1XTMt9WgUQWw4VRGbdNl1eJlTDWx98cV8kPBrwkpGQrXzhVyLFZbutbQFZP6GJc9KwMvGkrfd8KhhbHr000suCUloro"
@@ -60,6 +61,7 @@ function Cart() {
     console.log(productIds);
   }
 
+
   return (
     // restyle but maintain functionality
     <Menu.Item className="cart">
@@ -71,7 +73,14 @@ function Cart() {
           ))}
 
           <Menu.Item className="flex-row space-between">
-            <strong>Total: ${calculateTotal()}</strong>
+            <Grid columns={2}>
+              <Grid.Column verticalAlign='middle' >
+                <strong>Total: ${calculateTotal()}</strong> 
+              </Grid.Column>
+              <Grid.Column verticalAlign='middle' >
+                <Button color="red"> Clear</Button>
+              </Grid.Column>
+            </Grid>
           </Menu.Item>
           <Menu.Item>
             {" "}

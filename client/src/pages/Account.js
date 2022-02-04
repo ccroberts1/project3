@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Modal, Icon, Input } from "semantic-ui-react";
+import { Button, Form, Modal, Icon, Input, Dropdown } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
 import { UPDATE_USER } from "../utils/mutations";
@@ -48,17 +48,17 @@ function Account() {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Button
-          style={{
-            height: "100%",
-            width: "100%",
-            border: 0,
-            background: "transparent",
-            color: "#c8c8c8",
-          }}
+        <Dropdown.Item
+          // style={{
+          //   height: "100%",
+          //   width: "100%",
+          //   border: 0,
+          //   background: "transparent",
+          //   color: "#c8c8c8",
+          // }}
         >
           Update Account
-        </Button>
+        </Dropdown.Item>
       }
     >
       <Modal.Header>Update Your Account Information Here</Modal.Header>
