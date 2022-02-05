@@ -109,8 +109,8 @@ const resolvers = {
       return { token, user };
     },
     addOrder: async (parent, { products }, context) => {
-      console.log(context);
-      if (true) {
+      // console.log(context);
+      // if (context.user) {
         const order = new Order({ products });
         console.log(order)
 
@@ -119,7 +119,7 @@ const resolvers = {
         // });
 
         return order;
-      }
+      // }
 
       throw new AuthenticationError("Not logged in");
     },
@@ -195,11 +195,11 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       const correctPw = await user.isCorrectPassword(password);
-      let validation = false
+      let validation = "No"
 
       if (correctPw) {
         
-        validation = true
+        validation = "Yes"
         console.log(validation)
       } else {
         throw new AuthenticationError("Incorrect credentials");

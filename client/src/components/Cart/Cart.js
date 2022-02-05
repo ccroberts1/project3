@@ -7,7 +7,7 @@ import { idbPromise } from "../../utils/helpers";
 import CartItem from "./CartItem";
 import Auth from "../../utils/auth";
 import { useStoreContext } from "../../utils/StoreContext";
-import { ADD_MULTIPLE_TO_CART } from "../../utils/actions";
+import { ADD_MULTIPLE_TO_CART, CLEAR_CART } from "../../utils/actions";
 
 
 const stripePromise = loadStripe(
@@ -59,7 +59,10 @@ function Cart() {
       variables: { products: productIds },
     });
   }
-
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART })
+    idbPromise("cart", "clear")
+  }
 
   return (
     // restyle but maintain functionality
@@ -77,7 +80,7 @@ function Cart() {
                 <strong>Total: ${calculateTotal()}</strong> 
               </Grid.Column>
               <Grid.Column verticalAlign='middle' >
-                <Button color="red"> Clear</Button>
+                <Button color="red" onClick={clearCart}> Clear</Button>
               </Grid.Column>
             </Grid>
           </Menu.Item>
