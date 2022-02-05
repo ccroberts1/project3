@@ -65,8 +65,10 @@ const typeDefs = gql`
       email: String
       password: String
     ): User
+    removeUser(_id: ID!): User
     updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
+    confirmPassword(email: String!, password: String!): User
   }
 `;
 

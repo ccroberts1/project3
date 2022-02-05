@@ -6,10 +6,10 @@ import { Media } from "../utils/MediaContextProvider";
 import { Icon, Menu, Sidebar, Container, Dropdown } from "semantic-ui-react";
 import Auth from "../utils/auth";
 import ProductList from "../pages/ProductList";
-import Cart from "./Cart";
+import Cart from "./Cart/Cart";
 import Footer from "./Footer";
 import Home from "../pages/Home";
-import Account from "../pages/Account";
+import Account from "./AccountUpdate/AccountUpdateModal";
 import Success from "../pages/Success";
 
 const NavBarMobile = (props) => {

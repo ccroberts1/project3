@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form, Modal, Icon, Input, Dropdown } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
-import { UPDATE_USER } from "../utils/mutations";
+import { QUERY_USER } from "../../utils/queries";
+import { UPDATE_USER } from "../../utils/mutations";
+import AccountDelete from './AccountDeleteModal'
 
 function Account() {
   const [open, setOpen] = React.useState(false);
@@ -100,6 +101,8 @@ function Account() {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
+        
+        <AccountDelete></AccountDelete>
         <Button
           content="Update Account"
           labelPosition="right"

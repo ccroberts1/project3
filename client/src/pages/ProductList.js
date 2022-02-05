@@ -31,12 +31,19 @@ function ProductList(props) {
 
   return (
     <Grid columns={4} divided="vertically">
-      <Grid.Column width={8}>
-        <Input error backgroundcolor="red" fluid icon='search' placeholder='Search...' />
+      <Grid.Column width={6}>
+        <Input error fluid icon='search' placeholder='Search...' />
       </Grid.Column>
+      <Grid.Column width={1}></Grid.Column>
      
-         <Grid.Column>
-         <Dropdown
+      <Grid.Column width={4}>
+        <Grid>
+          <Grid.Column width={5} verticalAlign='middle' style={{textAlign: "end"}}>
+            <p>Sort By</p>
+            </Grid.Column>
+            <Grid.Column verticalAlign='middle'>
+            <Dropdown
+              floated="right"
           // icon="filter"
           floating
           labeled
@@ -48,9 +55,11 @@ function ProductList(props) {
           error
         >
           
-        </Dropdown>
+            </Dropdown>
+            </Grid.Column>
+          </Grid>
       </Grid.Column>
-       <Grid.Column>
+       <Grid.Column floated="right">
         <Dropdown
           text="Filter"
           icon="filter"

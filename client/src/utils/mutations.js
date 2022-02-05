@@ -59,3 +59,21 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const REMOVE_USER = gql`
+  mutation removeUser($_id: ID!) {
+    removeUser(_id: $_id) {
+			email
+    }
+  }
+`;
+
+
+export const CONFIRM_PASSWORD = gql`
+  mutation confirmPassword($email: String!, $password: String!) {
+    confirmPassword(email: $email, password: $password) {
+      email
+    }
+  }
+
+`;

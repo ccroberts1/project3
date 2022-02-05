@@ -110,12 +110,13 @@ const resolvers = {
     },
     addOrder: async (parent, { products }, context) => {
       console.log(context);
-      if (context.user) {
+      if (true) {
         const order = new Order({ products });
+        console.log(order)
 
-        await User.findByIdAndUpdate(context.user_id, {
-          $push: { orders: order },
-        });
+        // await User.findByIdAndUpdate(context.user_id, {
+        //   $push: { orders: order },
+        // });
 
         return order;
       }
@@ -156,6 +157,14 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    removeUser: async (parent, args, context) => {
+      console.log("update user");
+      if (context.user) {
+        return await User.findByIdAndDelete(args);
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
     updateProduct: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;
 
@@ -181,6 +190,22 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    confirmPassword: async (parent, { email,password }) => {
+      const user = await User.findOne({ email });
+
+      const correctPw = await user.isCorrectPassword(password);
+      let validation = false
+
+      if (correctPw) {
+        
+        validation = true
+        console.log(validation)
+      } else {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      return { validation };
     },
   },
 };

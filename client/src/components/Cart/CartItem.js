@@ -1,8 +1,8 @@
-import { useStoreContext } from "../utils/StoreContext";
-import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
-import { idbPromise } from "../utils/helpers";
+import { useStoreContext } from "../../utils/StoreContext";
+import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
+import { idbPromise } from "../../utils/helpers";
 import { Icon, Menu, Grid } from "semantic-ui-react";
-import '../styles/CartQuantityStyle.css'
+import '../../styles/CartQuantityStyle.css'
 
 
 
@@ -86,7 +86,7 @@ const CartItem = ({ item }) => {
                 <button type="button" title="Up" className="add" onClick={change_quantity}>Up</button>
               </fieldset>
             </Grid.Column>
-            <Grid.Column floated='right' verticalAlign='middle' width={2} >
+            <Grid.Column  verticalAlign='middle' width={2} >
               <Icon name="trash alternate outline" onClick={() => removeFromCart(item)} />
               </Grid.Column>
             
