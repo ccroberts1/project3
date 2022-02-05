@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Button, Form, Modal, Icon, Input, Dropdown } from "semantic-ui-react";
+import { Button, Form, Modal, Icon, Input, Dropdown, Header } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries";
 import { UPDATE_USER } from "../../utils/mutations";
 import AccountDelete from './AccountDeleteModal'
 
 function Account() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const { data } = useQuery(QUERY_USER);
   // const userData = data?.user || {};
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const [formState, setFormState] = useState({
     firstName: data?.user?.firstName,
@@ -37,13 +38,22 @@ function Account() {
           email: formState.email,
         },
       });
-      alert("User information updated!");
+      // if (formState.firstName != undefined) {
+      // //   setFormState({
+      //   console.log("yes")
+      // // });
+      // }
+      
+      console.log(formState)
+      setConfirmOpen(true)
+      setOpen(false)
     } catch (err) {
       console.log(err);
     }
   }
   //   console.log(data);
   return (
+    <>
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -112,6 +122,26 @@ function Account() {
         />
       </Modal.Actions>
     </Modal>
+    <Modal
+      basic
+      onClose={() => setConfirmOpen(false)}
+      onOpen={() => setConfirmOpen(true)}
+      open={confirmOpen}
+      size='small'
+    >
+      <Header icon>
+        <Icon name='smile outline' />
+        You have successfully updated your account information.
+      </Header>
+
+      <Modal.Actions>
+
+        <Button color='green' inverted onClick={() => setConfirmOpen(false)}>
+           Okay
+        </Button>
+      </Modal.Actions>
+    </Modal>
+    </>
   );
 }
 

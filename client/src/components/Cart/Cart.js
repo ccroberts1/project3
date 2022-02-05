@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 import Auth from "../../utils/auth";
 import { useStoreContext } from "../../utils/StoreContext";
 import { ADD_MULTIPLE_TO_CART, CLEAR_CART } from "../../utils/actions";
+import SignInModal from "../SignInModal";
 
 
 const stripePromise = loadStripe(
@@ -80,7 +81,7 @@ function Cart() {
                 <strong>Total: ${calculateTotal()}</strong> 
               </Grid.Column>
               <Grid.Column verticalAlign='middle' >
-                <Button color="red" onClick={clearCart}> Clear</Button>
+                <Button color="red" onClick={clearCart}> Clear Cart</Button>
               </Grid.Column>
             </Grid>
           </Menu.Item>
@@ -88,16 +89,14 @@ function Cart() {
             {" "}
             {/* Check to see if the user is logged in. If so render a button to check out */}
             {Auth.loggedIn() ? (
-              <Button onClick={submitCheckout}>Checkout</Button>
+              <Button style={{width: "100%",}} onClick={submitCheckout}>Checkout</Button>
             ) : (
-              <span>(log in to check out)</span>
+              <SignInModal text="Sign In to Checkout"></SignInModal>
             )}
           </Menu.Item>
         </div>
       ) : (
         <Menu.Item>
-
-       
           Cart is empty, please add items to the cart to purchase.
         </Menu.Item>
       )}

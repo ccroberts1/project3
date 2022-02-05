@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Modal, Input} from "semantic-ui-react";
+import { Button, Form, Modal, Input, Checkbox} from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries";
 import { REMOVE_USER, CONFIRM_PASSWORD } from "../../utils/mutations";
@@ -33,7 +33,6 @@ function AccountDelete() {
     event.preventDefault();
       try {
           if (formState.email === data.user.email) {
-              console.log("correct email")
               const confirmation = await confirmPassword({
                   variables: {
                     email: formState.email,
@@ -69,7 +68,7 @@ function AccountDelete() {
         <Modal.Description>
           <Form>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Confirm Email</label>
               <Input
                 id="email-for-delete"
@@ -78,7 +77,7 @@ function AccountDelete() {
               >
               </Input>
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label>Confirm Password</label>
               <input
                 placeholder="Password"
@@ -87,6 +86,9 @@ function AccountDelete() {
                 id="password"
                 onChange={handleInputChange}
               />        
+            </Form.Field>
+            <Form.Field required> 
+              <Checkbox label="I understand this is permanent" id="trusy"  />
             </Form.Field>
           </Form>
         </Modal.Description>
