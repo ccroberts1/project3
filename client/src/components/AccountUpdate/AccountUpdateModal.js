@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Modal, Icon, Input, Dropdown, Header } from "semantic-ui-react";
+import { Button, Form, Modal, Icon, Input, Dropdown, Header, Accordion } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER } from "../../utils/queries";
 import { UPDATE_USER } from "../../utils/mutations";
@@ -7,7 +7,7 @@ import AccountDelete from './AccountDeleteModal'
 
 function Account() {
   const [open, setOpen] = useState(false);
-  const { data } = useQuery(QUERY_USER);
+  const { data, refetch } = useQuery(QUERY_USER);
   // const userData = data?.user || {};
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -38,20 +38,51 @@ function Account() {
           email: formState.email,
         },
       });
-      // if (formState.firstName != undefined) {
-      // //   setFormState({
-      //   console.log("yes")
-      // // });
-      // }
-      
-      console.log(formState)
+      refetch()
       setConfirmOpen(true)
       setOpen(false)
     } catch (err) {
       console.log(err);
     }
   }
-  //   console.log(data);
+
+
+  const panels = [
+  {
+    key: 'password-update',
+    title: 'Update Password',
+    content: {
+
+      content: (
+            <>
+      <Form.Input
+            label="Confirm Old Password"
+            placeholder="Old Password"
+            type="password"
+            name="oldPassword"
+            // onChange={handleInputChange}
+            />
+      <Form.Input
+            label="New Password"
+            placeholder="New Password"
+            type="password"
+            name="newPassword"
+            // onChange={handleInputChange}
+          />
+      <Form.Input
+            label="Confirm New Password"
+            placeholder="Old Password"
+            type="password"
+            name="confirmNewPassword"
+            // onChange={handleInputChange}
+            />
+          </>
+      ),
+    },
+  },
+]
+
+
   return (
     <>
     <Modal
@@ -106,7 +137,10 @@ function Account() {
                 <Icon name="at" />
                 <input />
               </Input>
-            </Form.Field>
+              </Form.Field>
+              <Accordion as={Form.Field} panels={panels}>
+              </Accordion>
+                
           </Form>
         </Modal.Description>
       </Modal.Content>
@@ -130,7 +164,7 @@ function Account() {
       size='small'
     >
       <Header icon>
-        <Icon name='smile outline' />
+        <Icon name='thumbs up outline' />
         You have successfully updated your account information.
       </Header>
 

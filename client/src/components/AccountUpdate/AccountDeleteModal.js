@@ -10,6 +10,15 @@ function AccountDelete() {
   const { data } = useQuery(QUERY_USER);
   // const userData = data?.user || {};
 
+  const [ confirmBox, setConfirm ] = useState(false)
+  function confirmToggle (e, {checked}) {
+    const confirmed = checked;
+    console.log(confirmed)
+    setConfirm(confirmed)
+
+  }
+
+
   const [formState, setFormState] = useState({
       email: data?.user?.email,
       password: "",
@@ -32,15 +41,15 @@ function AccountDelete() {
   async function submitNewInfo(event) {
     event.preventDefault();
       try {
-          if (formState.email === data.user.email) {
-              const confirmation = await confirmPassword({
+          if (confirmBox) {
+              const verification = await confirmPassword({
                   variables: {
                     email: formState.email,
                     password: formState.password,
                 },
                 })
               const deletedUser = await removeUser({ variables: { _id: UserId } });
-              console.log(deletedUser)
+              console.log("TestConfirm")
               Auth.logout()
           } else {
               console.log("incorrect email")
@@ -88,7 +97,7 @@ function AccountDelete() {
               />        
             </Form.Field>
             <Form.Field required> 
-              <Checkbox label="I understand this is permanent" id="trusy"  />
+              <Checkbox label="I understand this is permanent" id="confirm" checked={confirmBox} onClick={confirmToggle}/>
             </Form.Field>
           </Form>
         </Modal.Description>
