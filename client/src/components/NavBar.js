@@ -108,9 +108,9 @@ const NavBarDesktop = (props) => {
     Auth.logout();
   };
 
-  const notFound = () => {
-    alert("This page is not complete. Sorry")
-  }
+  // const notFound = () => {
+  //   alert("This page is not complete. Sorry")
+  // }
 
   return (
     <Sidebar.Pushable>
@@ -140,9 +140,9 @@ const NavBarDesktop = (props) => {
               <Menu.Item style={{ padding: 0 }} as="a">
                 <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
-                    <Dropdown.Item onClick={notFound}>
+                    {/* <Dropdown.Item onClick={notFound}>
                       Order History
-                    </Dropdown.Item>
+                    </Dropdown.Item> */}
                     <Account />
                     <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
                   </Dropdown.Menu>

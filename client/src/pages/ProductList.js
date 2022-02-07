@@ -31,12 +31,12 @@ function ProductList(props) {
 
   return (
     <Grid columns={4} divided="vertically">
-      <Grid.Column width={6}>
+      {/* <Grid.Column width={6}>
         <Input error fluid icon='search' placeholder='Search...' />
-      </Grid.Column>
-      <Grid.Column width={1}></Grid.Column>
+      </Grid.Column> */}
+      {/* <Grid.Column width={1}></Grid.Column> */}
      
-      <Grid.Column width={4}>
+      {/* <Grid.Column width={4}>
         <Grid>
           <Grid.Column width={5} verticalAlign='middle' style={{textAlign: "end"}}>
             <p>Sort By</p>
@@ -58,7 +58,7 @@ function ProductList(props) {
             </Dropdown>
             </Grid.Column>
           </Grid>
-      </Grid.Column>
+      </Grid.Column> */}
        <Grid.Column floated="right">
         <Dropdown
           text="Filter"

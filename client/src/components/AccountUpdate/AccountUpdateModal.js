@@ -138,8 +138,8 @@ function Account() {
                 <input />
               </Input>
               </Form.Field>
-              <Accordion as={Form.Field} panels={panels}>
-              </Accordion>
+              {/* <Accordion as={Form.Field} panels={panels}>
+              </Accordion> */}
                 
           </Form>
         </Modal.Description>
