@@ -10,19 +10,23 @@ function Success() {
     async function saveOrder() {
       const cart = await idbPromise("cart", "get");
       const products = cart.map((item) => item._id);
+      console.log(cart)
+      console.log(products)
 
       if (products.length) {
         const { data } = await addOrder({ variables: { products } });
         const productData = data.addOrder.products;
+        console.log(data)
+        console.log(productData)
 
-        productData.forEach((item) => {
-          idbPromise("cart", "delete", item);
-        });
+        // productData.forEach((item) => {
+        //   idbPromise("cart", "delete", item);
+        // });
       }
 
       setTimeout(() => {
         window.location.assign("/");
-      }, 3000);
+      }, 50000000);
     }
 
     saveOrder();

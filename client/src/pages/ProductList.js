@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Grid,
-  Dropdown
+  Dropdown, Input
 } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS, QUERY_CATEGORIES } from "../utils/queries";
@@ -16,28 +16,34 @@ function ProductList(props) {
   const {data: product_data, refetch } = useQuery(QUERY_PRODUCTS, {
     variables: {category: chosenCategory}
   });
-  console.log(product_data);
   const products = product_data?.products || [];
 
   const { data: category_data } = useQuery(QUERY_CATEGORIES);
   const categories = category_data?.categories || [];
-  console.log(category_data)
+
 
   
-//   const options = [
-//   { key: 1, text: 'Price: Low to High ', value: 1 },
-//   { key: 2, text: 'Price: High to Low', value: 2 }
-// ]
+  const options = [
+  { key: 1, text: 'Price: Low to High ', value: 1 },
+  { key: 2, text: 'Price: High to Low', value: 2 }
+]
 
 
   return (
     <Grid columns={4} divided="vertically">
-      {/* <Grid.Column width={8}>
-        <Input fluid icon='search' placeholder='Search...' />
+      {/* <Grid.Column width={6}>
+        <Input error fluid icon='search' placeholder='Search...' />
       </Grid.Column> */}
+      {/* <Grid.Column width={1}></Grid.Column> */}
      
-         {/* <Grid.Column>
-         <Dropdown
+      {/* <Grid.Column width={4}>
+        <Grid>
+          <Grid.Column width={5} verticalAlign='middle' style={{textAlign: "end"}}>
+            <p>Sort By</p>
+            </Grid.Column>
+            <Grid.Column verticalAlign='middle'>
+            <Dropdown
+              floated="right"
           // icon="filter"
           floating
           labeled
@@ -46,11 +52,14 @@ function ProductList(props) {
           clearable
           options={options}
           selection
+          error
         >
           
-        </Dropdown>
+            </Dropdown>
+            </Grid.Column>
+          </Grid>
       </Grid.Column> */}
-       <Grid.Column>
+       <Grid.Column floated="right">
         <Dropdown
           text="Filter"
           icon="filter"

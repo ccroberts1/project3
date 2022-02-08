@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Button, Form, Modal, Icon, Input } from "semantic-ui-react";
+import { Button, Form, Modal, Icon, Input, Dropdown, Header, Accordion } from "semantic-ui-react";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
-import { UPDATE_USER } from "../utils/mutations";
+import { QUERY_USER } from "../../utils/queries";
+import { UPDATE_USER } from "../../utils/mutations";
+import AccountDelete from './AccountDeleteModal'
 
 function Account() {
-  const [open, setOpen] = React.useState(false);
-  const { data } = useQuery(QUERY_USER);
+  const [open, setOpen] = useState(false);
+  const { data, refetch } = useQuery(QUERY_USER);
   // const userData = data?.user || {};
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const [formState, setFormState] = useState({
     firstName: data?.user?.firstName,
@@ -36,29 +38,69 @@ function Account() {
           email: formState.email,
         },
       });
-      alert("User information updated!");
+      refetch()
+      setConfirmOpen(true)
+      setOpen(false)
     } catch (err) {
       console.log(err);
     }
   }
-  //   console.log(data);
+
+
+  const panels = [
+  {
+    key: 'password-update',
+    title: 'Update Password',
+    content: {
+
+      content: (
+            <>
+      <Form.Input
+            label="Confirm Old Password"
+            placeholder="Old Password"
+            type="password"
+            name="oldPassword"
+            // onChange={handleInputChange}
+            />
+      <Form.Input
+            label="New Password"
+            placeholder="New Password"
+            type="password"
+            name="newPassword"
+            // onChange={handleInputChange}
+          />
+      <Form.Input
+            label="Confirm New Password"
+            placeholder="Old Password"
+            type="password"
+            name="confirmNewPassword"
+            // onChange={handleInputChange}
+            />
+          </>
+      ),
+    },
+  },
+]
+
+
   return (
+    <>
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Button
-          style={{
-            height: "100%",
-            width: "100%",
-            border: 0,
-            background: "transparent",
-            color: "#c8c8c8",
-          }}
+        <Dropdown.Item
+          // style={{
+          //   height: "100%",
+          //   width: "100%",
+          //   border: 0,
+          //   background: "transparent",
+          //   color: "#c8c8c8",
+          // }}
         >
           Update Account
-        </Button>
+        </Dropdown.Item>
       }
     >
       <Modal.Header>Update Your Account Information Here</Modal.Header>
@@ -95,11 +137,16 @@ function Account() {
                 <Icon name="at" />
                 <input />
               </Input>
-            </Form.Field>
+              </Form.Field>
+              {/* <Accordion as={Form.Field} panels={panels}>
+              </Accordion> */}
+                
           </Form>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
+        
+        <AccountDelete></AccountDelete>
         <Button
           content="Update Account"
           labelPosition="right"
@@ -109,6 +156,26 @@ function Account() {
         />
       </Modal.Actions>
     </Modal>
+    <Modal
+      basic
+      onClose={() => setConfirmOpen(false)}
+      onOpen={() => setConfirmOpen(true)}
+      open={confirmOpen}
+      size='small'
+    >
+      <Header icon>
+        <Icon name='thumbs up outline' />
+        You have successfully updated your account information.
+      </Header>
+
+      <Modal.Actions>
+
+        <Button color='green' inverted onClick={() => setConfirmOpen(false)}>
+           Okay
+        </Button>
+      </Modal.Actions>
+    </Modal>
+    </>
   );
 }
 

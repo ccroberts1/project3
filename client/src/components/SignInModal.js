@@ -63,7 +63,7 @@ function SignInModal(props) {
       <Modal.Header>Sign In</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Field>
               <label>Email</label>
               <Input
@@ -87,6 +87,7 @@ function SignInModal(props) {
                 onChange={handleInputChange}
               />
             </Form.Field>
+            <Button type='submit' style={{display: "none"}}>Submit</Button>
           </Form>
         </Modal.Description>
       </Modal.Content>

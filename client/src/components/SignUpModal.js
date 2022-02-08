@@ -41,6 +41,8 @@ function SignUpModal(props) {
     Auth.login(token);
   };
 
+  
+
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -63,7 +65,7 @@ function SignUpModal(props) {
       <Modal.Header>Sign Up for a New Account</Modal.Header>
       <Modal.Content>
         <Modal.Description>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Field>
               <label>First Name</label>
               <input
@@ -118,6 +120,7 @@ function SignUpModal(props) {
             <Form.Field>
               <Checkbox label="I agree to the Terms and Conditions" />
             </Form.Field>
+            <Button type='submit' style={{display: "none"}}>Submit</Button>
           </Form>
         </Modal.Description>
       </Modal.Content>

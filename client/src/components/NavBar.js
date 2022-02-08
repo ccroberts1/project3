@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import SignInModal from "./SignInModal";
 import SignUpModal from "./SignUpModal";
 import { Media } from "../utils/MediaContextProvider";
-import { Icon, Menu, Sidebar, Container } from "semantic-ui-react";
+import { Icon, Menu, Sidebar, Container, Dropdown } from "semantic-ui-react";
 import Auth from "../utils/auth";
 import ProductList from "../pages/ProductList";
-import Cart from "./Cart";
+import Cart from "./Cart/Cart";
 import Footer from "./Footer";
 import Home from "../pages/Home";
-import Account from "../pages/Account";
+import Account from "./AccountUpdate/AccountUpdateModal";
 import Success from "../pages/Success";
 
 const NavBarMobile = (props) => {
@@ -20,8 +20,13 @@ const NavBarMobile = (props) => {
     Auth.logout();
   };
 
+  
+  const notFound = () => {
+    alert("This page is not complete. Sorry")
+  }
+
   return (
-    <Sidebar.Pushable>
+     <Sidebar.Pushable>
       <Sidebar
         as={Menu}
         animation="overlay"
@@ -37,25 +42,25 @@ const NavBarMobile = (props) => {
         dimmed={visible}
         onClick={onPusherClick}
         style={{ minHeight: "100vh" }}
-      >     <Menu fixed="top" inverted>
+      >
+        <Menu fixed="top" inverted>
           {leftItems.map((item) => (
             <Menu.Item {...item} />
           ))}
 
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
-              <Menu.Item onClick={logout}>Sign Out</Menu.Item>
-              <Menu.Item as="a">
-                {/* <Dropdown text='Account' pointing className='link item'>
+              <Menu.Item style={{ padding: 0 }} as="a">
+                <Dropdown icon='sidebar' pointing className='link item'>
                   <Dropdown.Menu>
-                    <Dropdown.Item>
+                    <Dropdown.Item onClick={notFound}>
                       Order History
                     </Dropdown.Item>
-                    <Dropdown.Item>Account Settings</Dropdown.Item>
-                    <Dropdown.Item>Sign Out</Dropdown.Item>
+                    <Account />
+                    <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
                   </Dropdown.Menu>
-                </Dropdown> */}
-                <Account />
+                </Dropdown>
+                
               </Menu.Item>
               <Menu.Item as="a" onClick={onToggle}>
                 <Icon name="shopping cart"></Icon>
@@ -82,9 +87,11 @@ const NavBarMobile = (props) => {
         </Menu>
         <Container style={{ marginTop: "50px" }}>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/ProductList" element={<ProductList columnNumber={2}  />} />
-            <Route exact path="/Succes" element={<Success />} />
+            <Route exact path="/" element={<Home />}></Route>
+
+            <Route exact path="/ProductList" element={<ProductList  columnNumber={4}  />}></Route>
+
+            <Route exact path="/Success" element={<Success />}></Route>
           </Routes>
         </Container>
         <Footer />
@@ -100,6 +107,10 @@ const NavBarDesktop = (props) => {
     event.preventDefault();
     Auth.logout();
   };
+
+  // const notFound = () => {
+  //   alert("This page is not complete. Sorry")
+  // }
 
   return (
     <Sidebar.Pushable>
@@ -126,18 +137,17 @@ const NavBarDesktop = (props) => {
 
           {Auth.loggedIn() ? (
             <Menu.Menu position="right">
-              <Menu.Item onClick={logout}>Sign Out</Menu.Item>
               <Menu.Item style={{ padding: 0 }} as="a">
-                {/* <Dropdown text='Account' pointing className='link item'>
+                <Dropdown text='Account' pointing className='link item'>
                   <Dropdown.Menu>
-                    <Dropdown.Item>
+                    {/* <Dropdown.Item onClick={notFound}>
                       Order History
-                    </Dropdown.Item>
-                    <Dropdown.Item>Account Settings</Dropdown.Item>
-                    <Dropdown.Item>Sign Out</Dropdown.Item>
+                    </Dropdown.Item> */}
+                    <Account />
+                    <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
                   </Dropdown.Menu>
-                </Dropdown> */}
-                <Account />
+                </Dropdown>
+                
               </Menu.Item>
               <Menu.Item as="a" onClick={onToggle}>
                 <Icon name="shopping cart"></Icon>
